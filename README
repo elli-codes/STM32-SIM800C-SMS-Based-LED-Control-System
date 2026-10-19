@@ -71,3 +71,12 @@ PB14: Observe SMS notification configuration and unauthorized-response retries.
 PB15: Observe the remotely controlled output.
 
 This approach is useful for embedded debugging when UART output is occupied by the GSM module.
+
+💻 Written using:
+
+STM32CubeMX for configuration
+
+IAR Embedded Workbench for compiling
+
+📽️Working demo video available on YouTube:https://youtu.be/78IA-xVzKmA 
+
