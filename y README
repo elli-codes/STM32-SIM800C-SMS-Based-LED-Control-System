@@ -1,0 +1,73 @@
+📱 STM32 + SIM800C SMS-Based LED Control System
+
+An embedded systems project that uses an STM32 microcontroller and a SIM800C GSM/GPRS module to control an LED remotely through SMS messages. The system checks the sender's phone number before executing a command and automatically replies to unauthorized senders with a registration warning.
+
+🚀 Project Overview
+
+This project demonstrates how to integrate a GSM module with an STM32 microcontroller using UART communication and AT commands.
+
+The SIM800C receives SMS messages and notifies the STM32 when a new message arrives. The microcontroller reads the message, extracts the sender's phone number, and checks whether the sender is authorized.
+
+✅ Authorized user: Can turn the controlled LED ON or OFF using SMS commands.
+
+🚫 Unauthorized user: Cannot control the LED and receives an SMS stating that they are not registered.
+
+💡 LED debugging: LEDs connected to GPIO pins PB12, PB13, and PB14 indicate important stages of the communication and message-processing workflow.
+
+📩 Automatic response: The system sends a READY SMS during startup and an authorization warning to unregistered senders.
+
+✨ Features
+
+📡 GSM communication using the SIM800C module
+
+🔌 UART communication between the STM32 and SIM800C
+
+📥 Incoming SMS notification using AT+CNMI
+
+📖 SMS retrieval using AT+CMGR
+
+🔐 Sender phone-number verification
+
+💡 Remote LED control using on and off SMS commands
+
+🚫 Unauthorized sender rejection
+
+📤 Automatic SMS responses using AT+CMGS
+
+🔍 GPIO-based debugging to monitor program execution
+
+⚙️ How It Works:
+
+The program follows a sequence of initialization, notification, message retrieval, authorization, and execution.
+
+Initialize the GSM module: The STM32 sends AT commands and checks the responses.
+
+Configure SMS operation: The module is configured for text-mode SMS and new-message notifications.
+
+Send a startup message: The system attempts to send a READY SMS to the configured phone number.
+
+Detect an incoming SMS: The STM32 looks for a +CMTI: notification containing the SMS storage index.
+
+Retrieve the message: The firmware sends AT+CMGR to read the SMS and extract the sender's phone number and message body.
+
+Verify authorization: The sender's number is compared with the phone number configured in the firmware.
+
+Execute an authorized command: The SMS body is checked for on or off, and PB15 is set HIGH or LOW accordingly.
+
+Reject unauthorized senders: If a sender's number is present but does not match the configured number, the firmware attempts to reply:
+
+SORRY ,YOU ARE NOT REGISTERED!
+
+🐛 Debugging with LEDs
+
+The diagnostic LEDs provide a simple way to observe the program without requiring a debugger or serial console.
+
+PB12: Observe AT communication initialization and incoming SMS notifications.
+
+PB13: Observe text-mode initialization and SMS retrieval.
+
+PB14: Observe SMS notification configuration and unauthorized-response retries.
+
+PB15: Observe the remotely controlled output.
+
+This approach is useful for embedded debugging when UART output is occupied by the GSM module.
